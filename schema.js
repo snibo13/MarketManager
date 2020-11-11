@@ -2,74 +2,76 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 var FundManagerSchema = new Schema({
-  "Name" : String,
-  "Address" : String,
-  "Email"   : String,
-  "Password" : String,
-  "Salt" :  String
+  name      : String,
+  address   : String,
+  email     : String,
+  password  : String,
+  salt      :  String
 });
 
 var FundManagerModel = mongoose.model("Fund Manager", FundManagerSchema);
 exports.FundManagerModel = FundManagerModel;
 
 
-var SchemeSchema = new Schema({
-  "Name" : String,
-  "Fund Manager" : FundManagerSchema,
-  "Established" : Date,
-  "Funds" : [FundSchema]
-});
-
-var SchemeModel = mongoose.model("Scheme", SchemeSchema);
-exports.SchemeModel = SchemeModel;
-
-
 var PriceSchema = new Schema({
-  "Price": Decimal128,
-  "Date": Date
+  price : Number,
+  date  : Date
 });
 
 var PriceModel = mongoose.model("Price", PriceSchema);
 exports.PriceModel = PriceModel;
 
 var FundSchema = new Schema({
-  "Fund Type": {
+  fundType: {
     type: String,
     enum: ["EQUITY","BALANCED","FIXED INCOME","MONEY MARKET", "OTHER"]
   },
-  "Returns": {
-    "Month": Decimal128,
-    "Year": Decimal128,
-    "3 Year": Decimal128,
-    "5 Year": Decimal128,
-    "10 Year": Decimal128,
-    "All Time": Decimal128,
+  returns: {
+    month       : Number,
+    threeMonth  : Number,
+    year        : Number,
+    threeYear   : Number,
+    fiveYear    : Number,
+    tenYear     : Number,
+    allTime     : Number
   },
-  "Risk Adjusted Returns": {
-    "Month": Decimal128,
-    "Year": Decimal128,
-    "3 Year": Decimal128,
-    "5 Year": Decimal128,
-    "10 Year": Decimal128,
-    "All Time": Decimal128,
+  riskAdjustedReturns: {
+    month       : Number,
+    threeMonth  : Number,
+    year        : Number,
+    threeYear   : Number,
+    fiveYear    : Number,
+    tenYear     : Number,
+    allTime     : Number
   },
-  "Prices" : [PriceSchema],
-  "Distribution Percentages" : {
-   "Shares": Number,
-   "corporate bonds": Number,
-   "treasury bonds": Number,
-   "treasury notes": Number,
-   "municipal/ government bonds": Number,
-   "treasury bills": Number,
-   "preference shares": Number,
-   "commercial papers": Number,
-   "Fixed bank deposits": Number,
-   "Fixed Non-bank deposits": Number,
-   "Cash": Number,
-   "Other funds": Number,
-   "Alternative investments": Number,
+  prices : [PriceSchema],
+  distributionPercentages : {
+   shares                   : Number,
+   corporateBonds           : Number,
+   treasuryBonds            : Number,
+   treasuryNotes            : Number,
+   municipalBonds           : Number,
+   treasuryBills            : Number,
+   preferenceShares         : Number,
+   commercialPapers         : Number,
+   fixedBankDeposits        : Number,
+   fixedNonBankDeposits     : Number,
+   cash                     : Number,
+   otherFunds               : Number,
+   alternativeInvestments   : Number,
   }
 });
 
 var FundModel = mongoose.model("Fund", FundSchema);
 exports.FundModel = FundModel;
+
+
+var SchemeSchema = new Schema({
+  name        : String,
+  fundManager : FundManagerSchema,
+  established : Date,
+  funds       : [FundSchema]
+});
+
+var SchemeModel = mongoose.model("Scheme", SchemeSchema);
+exports.SchemeModel = SchemeModel;

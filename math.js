@@ -1,5 +1,5 @@
-function geometricMean(datapoints, initialValue = 1) {
-  let val = initialValue * datapoints[0] + 1;
+function geometricMean(datapoints) {
+  let val = datapoints[0] + 1;
   for(let i = 1; i < datapoints.length; i++) {
     let temp = datapoints[i] + 1;
     val *= temp;
@@ -7,7 +7,7 @@ function geometricMean(datapoints, initialValue = 1) {
   return Math.pow(val, 1/datapoints.length);
 }
 
-function arithmeticMean(datapoints, initialValue = 0) {
+function arithmeticMean(datapoints) {
   let val = initialValue;
   for (let i = 0; i < datapoints.length; i++) {
     val += datapoints[i];
@@ -43,5 +43,5 @@ function calculateDates() {
   threeYear.setYear(oneYear.getYear() + 2);
   let tenYear = threeYear;
   tenYear.setYear(threeYear.getYear() + 7);
-  return[oneMonth, twoMonth, threeMonth, oneYear, threeYear, tenYear];
+  return[present, oneMonth, threeMonth, oneYear, threeYear, tenYear];
 }
