@@ -1,0 +1,26 @@
+html {
+  padding: 0;
+  margin: 0;
+}
+body {
+  display: grid;
+  grid-template-columns: 5vw 5vw 10vw auto 10vw 5vw 5vw;
+  background-color: #081B33;
+  color: grey;
+  font-family: "Poppins", sans-serif;
+}
+
+p
+{
+  font-family: "Open Sans", sans-serif;
+}
+
+.card {
+  background-color:#152642;
+  border-radius: 1vmin;
+  padding: 3vmin;
+  box-shadow: 5px 10px 10px rgb(0, 0, 0);
+  grid-column-start: 2;
+  grid-column-end: 7;
+}
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="/index.js" type="text/babel"></script>
+    <script>
+      const signin = async() =>
+      {
+        
+        const response = await fetch(
+          'localhost:1111/api/user',
+          {
+            method: 'GET',
+            body: JSON.jsonify($("#in").serializeArray()),
+            headers: {'Content-Type':'application/json'}
+          }
+        );
+        if (response == -1) $("#alert").text = "Email not found";
+        if (response == -2) $("#alert").text = "Password does not match email";
+        else window.location.href = window.location.hostname + `/user/${response}`;
+      }
+    </script>
+  </head>
+  <body>
+    <h2 id="alert"></h2>
+    <form id="in">
+      <input id="email" type="text"></input>
+      <input id="password" type="password"></input>
+      <button id="submit" onclick="signin()">Sign Up</button>
+    </form>
+  </body>
+</html>

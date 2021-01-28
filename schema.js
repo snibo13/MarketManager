@@ -1,16 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-var FundManagerSchema = new Schema({
-  name      : String,
-  address   : String,
-  email     : String,
-  password  : String,
-  salt      :  String
-});
-
-var FundManagerModel = mongoose.model("Fund Manager", FundManagerSchema);
-exports.FundManagerModel = FundManagerModel;
 
 
 var PriceSchema = new Schema({
@@ -22,10 +12,12 @@ var PriceModel = mongoose.model("Price", PriceSchema);
 exports.PriceModel = PriceModel;
 
 var FundSchema = new Schema({
+  fundName: String,
   fundType: {
     type: String,
     enum: ["EQUITY","BALANCED","FIXED INCOME","MONEY MARKET", "OTHER"]
   },
+  fundManager: String,
   returns: {
     month       : Number,
     threeMonth  : Number,
@@ -61,6 +53,19 @@ var FundSchema = new Schema({
    alternativeInvestments   : Number,
   }
 });
+
+
+var FundManagerSchema = new Schema({
+  name      : String,
+  address   : String,
+  email     : String,
+  password  : String,
+  salt      :  String,
+  funds      : [FundSchema]
+});
+
+var FundManagerModel = mongoose.model("Fund Manager", FundManagerSchema);
+exports.FundManagerModel = FundManagerModel;
 
 var FundModel = mongoose.model("Fund", FundSchema);
 exports.FundModel = FundModel;
